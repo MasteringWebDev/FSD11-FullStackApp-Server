@@ -45,8 +45,8 @@ app.listen(PORT, () => {
       2. Client
         - Add withCredentials: true to the axios request
     - To set/clear cookies:
-      - res.cookie('token', token): Set the token
-      - res.clearCookie('token'): Clear the token
+      - res.cookie('token', token): Set the cookie
+      - res.clearCookie('token'): Clear the cookie
     - To access cookies:
       - Use 'cookie-parser' middleware in the server
         - app.use(cookieParser())
