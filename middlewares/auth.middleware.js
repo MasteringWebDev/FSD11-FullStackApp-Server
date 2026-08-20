@@ -18,7 +18,6 @@ export const isAuthenticated = (req, res, next) => {
 
     next()
   } catch (error) {
-    console.log(error)
     return res.status(401).json({
       message: 'You are not logged in, please login first.'
     })

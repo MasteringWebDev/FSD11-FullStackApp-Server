@@ -51,7 +51,7 @@ export const signupUser = async (req, res) => {
     const newUser = await User.create({ name, username, email, password: encryptedPassword, avatar })
 
     const { _id } = newUser
-    const token = jwt.sign({ _id, name, username }, JWT_SECRET, { expiresIn: JWT_EXPIRATION })
+    const token = jwt.sign({ _id, name, username, avatar }, JWT_SECRET, { expiresIn: JWT_EXPIRATION })
 
     res.cookie('token', token, {
       httpOnly: true,
@@ -102,8 +102,8 @@ export const loginUser = async (req, res) => {
       })
     }
 
-    const { _id, name, username } = user
-    const token = jwt.sign({ _id, name, username }, JWT_SECRET, { expiresIn: JWT_EXPIRATION })
+    const { _id, name, username, avatar } = user
+    const token = jwt.sign({ _id, name, username, avatar }, JWT_SECRET, { expiresIn: JWT_EXPIRATION })
     
     res.cookie('token', token, {
       httpOnly: true,
@@ -131,6 +131,12 @@ export const logoutUser = async (req, res) => {
       message: 'Something went wrong'
     })
   }
+}
+
+export const getCurrentUser = async (req, res) => {
+  res.json({
+    user: req.user,
+  })
 }
 
 export const updateUser = async (req, res) => {

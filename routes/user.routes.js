@@ -1,10 +1,11 @@
 import { Router } from 'express'
-import { fetchUsers, fetchUser, signupUser, loginUser, logoutUser, updateUser, deleteUser } from '../controllers/user.controller.js'
+import { fetchUsers, fetchUser, signupUser, loginUser, logoutUser, getCurrentUser, updateUser, deleteUser } from '../controllers/user.controller.js'
 import { isAuthenticated, isAuthorized } from '../middlewares/auth.middleware.js'
 
 const router = Router()
 
 router.get('/', fetchUsers)
+router.get('/me', isAuthenticated, getCurrentUser)
 router.get('/:id', fetchUser)
 
 router.post('/signup', signupUser)
